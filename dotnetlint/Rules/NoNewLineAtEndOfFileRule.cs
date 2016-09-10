@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -7,7 +7,7 @@ namespace dotnetlint.Rules
 {
     public class NoNewLineAtEndOfFileRule : Rule
     {
-        public void Walk(SyntaxNode root)
+        public IEnumerable<RuleViolation> Check(SyntaxNode root)
         {
             var x = root.DescendantTrivia(descendIntoTrivia: true).ToList();
             var count = x.Count;
@@ -17,9 +17,14 @@ namespace dotnetlint.Rules
 
             if (!secondToLast.IsKind(SyntaxKind.EndOfLineTrivia) && last.IsKind(SyntaxKind.EndOfLineTrivia))
             {
-                Console.WriteLine($"{root.GetLocation().GetLineSpan().Path} is missing a new line at the end");
+                var fileLinePositionSpan = root.GetLocation().GetLineSpan();
+                yield return new RuleViolation(nameof(NoNewLineAtEndOfFileRule),
+                    fileLinePositionSpan.Path,
+                    fileLinePositionSpan.StartLinePosition.Line,
+                    fileLinePositionSpan.StartLinePosition.Character,
+                    RuleDispostion.Warning,
+                    "No new line at end of file");
             }
-
         }
     }
 }

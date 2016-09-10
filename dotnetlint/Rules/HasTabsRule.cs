@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -7,7 +8,7 @@ namespace dotnetlint.Rules
 {
     public class HasTabsRule : Rule
     {
-        public void Walk(SyntaxNode root)
+        public IEnumerable<RuleViolation> Check(SyntaxNode root)
         {
             var hasTabs = root.DescendantTrivia(descendIntoTrivia: true)
                 .Where(node => node.IsKind(SyntaxKind.WhitespaceTrivia)
@@ -15,7 +16,15 @@ namespace dotnetlint.Rules
 
             foreach (var syntaxTrivia in hasTabs)
             {
-                Console.WriteLine($"Found tabs at {syntaxTrivia.GetLocation().GetLineSpan().EndLinePosition}");
+                var fileLinePositionSpan = syntaxTrivia.GetLocation().GetLineSpan();
+
+                yield return
+                    new RuleViolation(nameof(HasTabsRule),
+                        fileLinePositionSpan.Path,
+                        fileLinePositionSpan.StartLinePosition.Line,
+                        fileLinePositionSpan.StartLinePosition.Character,
+                        RuleDispostion.Warning, 
+                        "Has tabs.");
             }
         }
     }

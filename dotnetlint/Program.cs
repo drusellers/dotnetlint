@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using dotnetlint.Outputs;
 using dotnetlint.Rules;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
 
 namespace dotnetlint
 {
@@ -23,9 +27,14 @@ namespace dotnetlint
             {
                 foreach (var rule in rules)
                 {
-                    var x = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(File.ReadAllText(filePath));
+                    var st = SourceText.From(File.ReadAllText(filePath));
+                    var x = CSharpSyntaxTree.ParseText(st, CSharpParseOptions.Default, filePath);
                     var root = x.GetRoot();
-                    rule.Walk(root);
+
+                    foreach (var v in rule.Check(root))
+                    {
+                        new CompatFormat().Write(v);
+                    }
                 }
             }
         }

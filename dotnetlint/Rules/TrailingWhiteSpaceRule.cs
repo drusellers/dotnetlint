@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -7,9 +6,10 @@ namespace dotnetlint.Rules
 {
     public class TrailingWhiteSpaceRule : Rule
     {
-        public void Walk(SyntaxNode root)
+        public IEnumerable<RuleViolation> Check(SyntaxNode root)
         {
             var q = new Queue<SyntaxNodeOrToken>();
+            var result = new List<RuleViolation>();
 
             q.Enqueue(root);
             while (q.Count > 0)
@@ -19,27 +19,31 @@ namespace dotnetlint.Rules
                     continue;
 
                 foreach (var child in current.ChildNodesAndTokens())
-                {
                     q.Enqueue(child);
-                }
 
-                Check(current);
+                result.AddRange(Check(current));
             }
+
+            return result;
         }
 
-        void Check(SyntaxNodeOrToken node)
+        private IEnumerable<RuleViolation> Check(SyntaxNodeOrToken node)
         {
             var trivia = node.GetTrailingTrivia();
-            for (int i = 0; i < trivia.Count; i++)
+            for (var i = 0; i < trivia.Count; i++)
             {
                 var inspect = trivia[i];
                 if (inspect.IsKind(SyntaxKind.EndOfLineTrivia))
-                {
-                    if (i > 0 && trivia[i - 1].IsKind(SyntaxKind.WhitespaceTrivia))
+                    if ((i > 0) && trivia[i - 1].IsKind(SyntaxKind.WhitespaceTrivia))
                     {
-                        Console.WriteLine($"Found trailing whitespace at {node.GetLocation().GetLineSpan().EndLinePosition}");
+                        var fileLinePositionSpan = node.GetLocation().GetLineSpan();
+                        yield return new RuleViolation(nameof(TrailingWhiteSpaceRule),
+                            fileLinePositionSpan.Path,
+                            fileLinePositionSpan.StartLinePosition.Line,
+                            fileLinePositionSpan.StartLinePosition.Character,
+                            RuleDispostion.Warning,
+                            "Found trailing whitespace");
                     }
-                }
             }
         }
     }
