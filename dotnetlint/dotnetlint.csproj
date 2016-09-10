@@ -61,7 +61,7 @@
     <Compile Include="Configuration\LintConfiguration.cs" />
     <Compile Include="Configuration\LintOptionSet.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="OutputFormatter.cs" />
+    <Compile Include="OutputFormat.cs" />
     <Compile Include="Outputs\CompatFormat.cs" />
     <Compile Include="Outputs\VisualStudioFormat.cs" />
     <Compile Include="Program.cs" />

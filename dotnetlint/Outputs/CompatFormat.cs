@@ -2,7 +2,7 @@
 
 namespace dotnetlint.Outputs
 {
-    public class CompatFormat : OutputFormatter
+    public class CompatFormat : OutputFormat
     {
         public void Write(RuleViolation v)
         {

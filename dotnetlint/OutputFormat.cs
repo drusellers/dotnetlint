@@ -1,6 +1,6 @@
 ﻿namespace dotnetlint
 {
-    public interface OutputFormatter
+    public interface OutputFormat
     {
         void Write(RuleViolation v);
     }
