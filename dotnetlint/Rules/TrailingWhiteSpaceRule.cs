@@ -7,7 +7,7 @@ namespace dotnetlint.Rules
 {
     public class TrailingWhiteSpaceRule : Rule
     {
-        public void Walk(SyntaxNodeOrToken root)
+        public void Walk(SyntaxNode root)
         {
             var q = new Queue<SyntaxNodeOrToken>();
 
@@ -37,7 +37,7 @@ namespace dotnetlint.Rules
                 {
                     if (i > 0 && trivia[i - 1].IsKind(SyntaxKind.WhitespaceTrivia))
                     {
-                        Console.WriteLine($"Found whitespace at {node.GetLocation().GetLineSpan().EndLinePosition}");
+                        Console.WriteLine($"Found trailing whitespace at {node.GetLocation().GetLineSpan().EndLinePosition}");
                     }
                 }
             }

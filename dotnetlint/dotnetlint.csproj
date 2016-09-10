@@ -127,6 +127,8 @@
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\HasTabsRule.cs" />
+    <Compile Include="Rules\NoNewLineAtEndOfFileRule.cs" />
     <Compile Include="Rules\Rule.cs" />
     <Compile Include="Rules\TrailingWhiteSpaceRule.cs" />
   </ItemGroup>
@@ -135,7 +137,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="no-new-line.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sample.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tabs-spaces.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

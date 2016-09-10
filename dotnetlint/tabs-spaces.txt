@@ -1,0 +1,5 @@
+﻿public class Bob  
+{
+    public string Name { get; set; }
+	pubilc string Bob { get; set; }
+}

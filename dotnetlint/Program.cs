@@ -13,15 +13,19 @@ namespace dotnetlint
 
             var remaining = optionSet.Parse(args);
 
-            var rules = new List<Rule>();
-            rules.Add(new TrailingWhiteSpaceRule());
+            var rules = new List<Rule>
+            {
+                new TrailingWhiteSpaceRule(),
+                new NoNewLineAtEndOfFileRule(),
+                new HasTabsRule()
+            };
 
             foreach (var filePath in remaining)
             {
                 foreach (var rule in rules)
                 {
                     var x = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(File.ReadAllText(filePath));
-                    var root = x.GetRoot().ChildNodes().First();
+                    var root = x.GetRoot();
                     rule.Walk(root);
                 }
             }

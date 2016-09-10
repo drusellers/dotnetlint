@@ -4,6 +4,6 @@ namespace dotnetlint.Rules
 {
     public interface Rule
     {
-        void Walk(SyntaxNodeOrToken root);
+        void Walk(SyntaxNode root);
     }
 }
