@@ -27,7 +27,7 @@ namespace dotnetlint.Modes.GitHub.Sources
             var repo = parts[3];
             var number = int.Parse(parts[5]);
             var files = await _client.PullRequest.Files(owner, repo, number);
-
+            
             var result = new List<TextAndPath>();
             foreach (var file in files)
             {
