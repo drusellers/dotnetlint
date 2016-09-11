@@ -35,6 +35,7 @@ namespace dotnetlint.Sources
 
             return input.ToLower().Contains("http") 
                 && input.ToLower().Contains("github")
+                && input.ToLower().Contains("blob")
                 && Uri.TryCreate(input, UriKind.Absolute, out ignored);
         }
     }

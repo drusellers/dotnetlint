@@ -23,6 +23,12 @@ namespace dotnetlint.Sources
                 if (FileSource.CanHandle(input))
                 {
                     yield return new FileSource(input);
+                    continue;
+                }
+
+                if (GithubPrSource.CanHandle(input))
+                {
+                    yield return new GithubPrSource(input);
                 }
             }
         }

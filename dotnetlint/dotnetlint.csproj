@@ -79,6 +79,7 @@
     <Compile Include="Sources\DirGlobSource.cs" />
     <Compile Include="Sources\FileSource.cs" />
     <Compile Include="Sources\GithubBlobSource.cs" />
+    <Compile Include="Sources\GithubPrSource.cs" />
     <Compile Include="Sources\SourceFactory.cs" />
     <Compile Include="TextAndPath.cs" />
   </ItemGroup>
