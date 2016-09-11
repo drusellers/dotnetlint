@@ -17,7 +17,7 @@ namespace dotnetlint.Modes.LocalFileSystem
         public LocalFileSetOptionSet()
         {
             Format = new VisualStudioFormat();
-            Add<string>("f|format", "Select a format", x => Format = SafeGet(x));
+            Add<string>("f|format=", "Select a format", x => Format = SafeGet(x));
         }
 
         public OutputFormat Format { get; set; }

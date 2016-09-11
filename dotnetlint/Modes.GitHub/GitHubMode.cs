@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using dotnetlint.Modes.GitHub.Sources;
 using Octokit;
+using Octokit.Internal;
 
 namespace dotnetlint.Modes.GitHub
 {
@@ -12,9 +14,11 @@ namespace dotnetlint.Modes.GitHub
             var gho = new GitHubOptionSet();
             var remaining = gho.Parse(args);
 
-            var ghClient = new GitHubClient(new ProductHeaderValue("dotnetlint"));
-            //TOOD: AUTH
+            var ghClient = new GitHubClient(new ProductHeaderValue("dotnetlint"), 
+                new InMemoryCredentialStore(Credentials.Anonymous),
+                new Uri(gho.Address));
 
+            
             var sources = SourceFactory.BuildSources(ghClient, remaining);
 
             WorkIt.Work(sources, lintCfg.Rules, (sourceText, v) =>
