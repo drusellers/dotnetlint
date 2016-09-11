@@ -11,12 +11,13 @@ namespace dotnetlint.Modes.LocalFileSystem
         readonly IDictionary<string, OutputFormat> _outputs = new Dictionary<string, OutputFormat>
         {
             {"compact", new CompatFormat()},
-            {"visualstudio", new VisualStudioFormat()}
+            {"visualstudio", new VisualStudioFormat()},
+            {"stylish", new StylishFormat() }
         };
 
         public LocalFileSetOptionSet()
         {
-            Format = new VisualStudioFormat();
+            Format = new StylishFormat();
             Add<string>("f|format=", "Select a format", x => Format = SafeGet(x));
         }
 
@@ -29,7 +30,7 @@ namespace dotnetlint.Modes.LocalFileSystem
                 return _outputs[key];
             }
 
-            return _outputs["visualstudio"];
+            return _outputs["stylish"];
         }
     }
 

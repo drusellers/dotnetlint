@@ -71,6 +71,7 @@
     <Compile Include="Modes.GitHub\GitHubOptionSet.cs" />
     <Compile Include="Modes.LocalFileSystem\LocalFileSetOptionSet.cs" />
     <Compile Include="Modes.LocalFileSystem\LocalFileSystemMode.cs" />
+    <Compile Include="Outputs\StylishFormat.cs" />
     <Compile Include="WorkIt.cs" />
     <Compile Include="Modes\Mode.cs" />
     <Compile Include="Modes\ModeFactory.cs" />
@@ -83,7 +84,6 @@
     <Compile Include="Configuration\OptionValueType.cs" />
     <Compile Include="Configuration\OutputFormat.cs" />
     <Compile Include="Outputs\CompatFormat.cs" />
-    <Compile Include="Outputs\GithubPullRequestFormat.cs" />
     <Compile Include="Outputs\VisualStudioFormat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

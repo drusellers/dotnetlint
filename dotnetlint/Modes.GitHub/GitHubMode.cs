@@ -21,15 +21,18 @@ namespace dotnetlint.Modes.GitHub
             
             var sources = SourceFactory.BuildSources(ghClient, remaining);
 
-            WorkIt.Work(sources, lintCfg.Rules, (sourceText, v) =>
+            WorkIt.Work(sources, lintCfg.Rules, (sourceText, violations) =>
             {
-                ghClient.PullRequest.Comment.Create(sourceText.Github.Owner,
-                          sourceText.Github.Repo,
-                          sourceText.Github.PR,
-                          new PullRequestReviewCommentCreate(v.Message,
-                              v.Github.Sha,
-                              sourceText.Path,
-                              v.Line));
+                foreach (var v in violations)
+                {
+                    ghClient.PullRequest.Comment.Create(sourceText.Github.Owner,
+                                sourceText.Github.Repo,
+                                sourceText.Github.PR,
+                                new PullRequestReviewCommentCreate(v.Message,
+                                    v.Github.Sha,
+                                    sourceText.Path,
+                                    v.Line));
+                }
             });
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using dotnetlint.Modes.LocalFileSystem.Sources;
-using dotnetlint.Sources;
 
 namespace dotnetlint.Modes.LocalFileSystem
 {
@@ -15,10 +15,13 @@ namespace dotnetlint.Modes.LocalFileSystem
 
             var sources = SourceFactory.BuildSources(remaining);
 
+            Console.OutputEncoding = Encoding.UTF8;
             var output = Console.Out;
 
-            WorkIt.Work(sources, lintCfg.Rules, (sourceText, v) =>
-                    opts.Format.Write(output, v));
+            WorkIt.Work(sources, lintCfg.Rules,
+                (sourceText,
+                    v) => opts.Format.Write(output, sourceText, v)
+            );
         }
     }
 }
