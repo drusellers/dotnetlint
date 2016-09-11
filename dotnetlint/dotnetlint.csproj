@@ -70,6 +70,11 @@
     <Compile Include="Rules\NoNewLineAtEndOfFileRule.cs" />
     <Compile Include="Rule.cs" />
     <Compile Include="Rules\TrailingWhiteSpaceRule.cs" />
+    <Compile Include="Source.cs" />
+    <Compile Include="Sources\DirGlobSource.cs" />
+    <Compile Include="Sources\FileSource.cs" />
+    <Compile Include="Sources\GithubBlobSource.cs" />
+    <Compile Include="Sources\SourceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

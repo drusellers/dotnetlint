@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using dotnetlint.Outputs;
 using dotnetlint.Rules;
+using dotnetlint.Sources;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
 
 namespace dotnetlint
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var optionSet = new LintOptionSet();
 
@@ -23,57 +20,28 @@ namespace dotnetlint
                 new NoNewLineAtEndOfFileRule(),
                 new HasTabsRule()
             };
-            var formatters = new Dictionary<string ,OutputFormat>
+            var formatters = new Dictionary<string, OutputFormat>
             {
                 {"compact", new CompatFormat()},
-                {"visualstudio",new VisualStudioFormat() }
+                {"visualstudio", new VisualStudioFormat()}
             };
 
             OutputFormat formatter = new VisualStudioFormat();
             if (formatters.ContainsKey(optionSet.Format))
-            {
                 formatter = formatters[optionSet.Format];
-            }
 
-            foreach (var filePath in filePaths)
-            {
-                if (filePath.Contains("*"))
+            var sources = SourceFactory.BuildSources(filePaths);
+            foreach (var source in sources)
+                foreach (var sourceText in source.Get())
                 {
-                    var files = Directory.GetFiles(Environment.CurrentDirectory, filePath, SearchOption.AllDirectories);
-                    foreach (var file in files)
-                    {
-                        foreach (var rule in rules)
-                        {
-                            var st = SourceText.From(File.ReadAllText(file));
-                            var x = CSharpSyntaxTree.ParseText(st, CSharpParseOptions.Default, file);
-                            var root = x.GetRoot();
+                    var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source, CSharpParseOptions.Default,
+                        sourceText.Path);
+                    var root = syntaxTree.GetRoot();
 
-                            foreach (var v in rule.Check(root))
-                            {
-                                formatter.Write(v);
-                            }
-                        }
-                    }
+                    foreach (var rule in rules)
+                        foreach (var v in rule.Check(root))
+                            formatter.Write(v);
                 }
-                else
-                {
-                    if (File.Exists(filePath))
-                    {   
-                        foreach (var rule in rules)
-                        {
-                            var st = SourceText.From(File.ReadAllText(filePath));
-                            var x = CSharpSyntaxTree.ParseText(st, CSharpParseOptions.Default, filePath);
-                            var root = x.GetRoot();
-
-                            foreach (var v in rule.Check(root))
-                            {
-                                formatter.Write(v);
-                            }
-                        }
-                    }
-
-                }
-            }
         }
     }
 }
