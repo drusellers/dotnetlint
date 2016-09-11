@@ -9,6 +9,6 @@ namespace dotnetlint.Configuration
     {
         void Write(TextWriter output,
             TextAndPath text,
-            IEnumerable<RuleViolation> v);
+            IEnumerable<RuleViolation> violations);
     }
 }

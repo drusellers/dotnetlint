@@ -106,6 +106,7 @@
     <Compile Include="Modes.LocalFileSystem\LocalFileSystemMode.cs" />
     <Compile Include="Outputs\GitHubPrFormat.cs" />
     <Compile Include="Outputs\StylishFormat.cs" />
+    <Compile Include="Outputs\TeamCityFormat.cs" />
     <Compile Include="WorkIt.cs" />
     <Compile Include="Modes\Mode.cs" />
     <Compile Include="Modes\ModeFactory.cs" />
