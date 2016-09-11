@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using dotnetlint.Sources;
+﻿using System.Collections.Generic;
+using dotnetlint.Modes.GitHub.Sources;
 using Octokit;
 
 namespace dotnetlint.Modes.GitHub
@@ -13,31 +12,21 @@ namespace dotnetlint.Modes.GitHub
             var gho = new GitHubOptionSet();
             var remaining = gho.Parse(args);
 
-            var sources = SourceFactory.BuildSources(remaining);
+            var ghClient = new GitHubClient(new ProductHeaderValue("dotnetlint"));
+            //TOOD: AUTH
 
-            //TOOD: make this dynamic based on console or github
-            var output = Console.Out;
+            var sources = SourceFactory.BuildSources(ghClient, remaining);
 
-            foreach (var source in sources)
+            WorkIt.Work(sources, lintCfg.Rules, (sourceText, v) =>
             {
-                foreach (var sourceText in source.Get().Result)
-                {
-                    foreach (var rule in lintCfg.Rules)
-                    {
-                        foreach (var v in rule.Check(sourceText.Parse()))
-                        {
-                            var client = new GitHubClient(new ProductHeaderValue("dotnetlint"));
-                            client.PullRequest.Comment.Create(sourceText.Github.Owner,
-                                      sourceText.Github.Repo,
-                                      sourceText.Github.PR,
-                                      new PullRequestReviewCommentCreate(v.Message,
-                                          v.Github.Sha,
-                                          sourceText.Path,
-                                          v.Line));
-                        }
-                    }
-                }
-            }
+                ghClient.PullRequest.Comment.Create(sourceText.Github.Owner,
+                          sourceText.Github.Repo,
+                          sourceText.Github.PR,
+                          new PullRequestReviewCommentCreate(v.Message,
+                              v.Github.Sha,
+                              sourceText.Path,
+                              v.Line));
+            });
         }
     }
 }

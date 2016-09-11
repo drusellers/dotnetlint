@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using dotnetlint.Modes.GitHub.Sources;
-using dotnetlint.Modes.LocalFileSystem.Sources;
+using dotnetlint.Sources;
 
-namespace dotnetlint.Sources
+namespace dotnetlint.Modes.LocalFileSystem.Sources
 {
     public static class SourceFactory
     {
@@ -13,24 +12,11 @@ namespace dotnetlint.Sources
                 if (DirGlobSource.CanHandle(input))
                 {
                     yield return new DirGlobSource(input);
-                    continue;
-                }
-
-                if (GithubBlobSource.CanHandle(input))
-                {
-                    yield return new GithubBlobSource(input);
-                    continue;
                 }
 
                 if (FileSource.CanHandle(input))
                 {
                     yield return new FileSource(input);
-                    continue;
-                }
-
-                if (GithubPrSource.CanHandle(input))
-                {
-                    yield return new GithubPrSource(input);
                 }
             }
         }

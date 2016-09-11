@@ -12,25 +12,26 @@ namespace dotnetlint.Modes.GitHub.Sources
     public class GithubPrSource : Source
     {
         readonly Uri _input;
+        readonly IGitHubClient _client;
 
-        public GithubPrSource(string input)
+        public GithubPrSource(IGitHubClient client, string input)
         {
+            _client = client;
             _input = new Uri(input);
         }
 
         public async Task<IEnumerable<TextAndPath>> Get()
         {
-            var k = new GitHubClient(ProductHeaderValue.Parse("dotnetlint"));
             var parts = _input.PathAndQuery.Split('/');
             var owner = parts[2];
             var repo = parts[3];
             var number = int.Parse(parts[5]);
-            var files = await k.PullRequest.Files(owner, repo, number);
+            var files = await _client.PullRequest.Files(owner, repo, number);
 
             var result = new List<TextAndPath>();
             foreach (var file in files)
             {
-                var source = await k.Git.Blob.Get(owner, repo, file.Sha);
+                var source = await _client.Git.Blob.Get(owner, repo, file.Sha);
                 
                 var b = Convert.FromBase64String(source.Content);
                 var content = Encoding.UTF8.GetString(b);

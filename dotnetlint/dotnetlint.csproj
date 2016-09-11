@@ -65,11 +65,13 @@
   <ItemGroup>
     <Compile Include="LintConfiguration.cs" />
     <Compile Include="LintOptionSet.cs" />
+    <Compile Include="Modes.GitHub.Sources\SourceFactory.cs" />
     <Compile Include="Modes.GitHub\GithubData.cs" />
     <Compile Include="Modes.GitHub\GitHubMode.cs" />
     <Compile Include="Modes.GitHub\GitHubOptionSet.cs" />
     <Compile Include="Modes.LocalFileSystem\LocalFileSetOptionSet.cs" />
     <Compile Include="Modes.LocalFileSystem\LocalFileSystemMode.cs" />
+    <Compile Include="WorkIt.cs" />
     <Compile Include="Modes\Mode.cs" />
     <Compile Include="Modes\ModeFactory.cs" />
     <Compile Include="Configuration\Option.cs" />
@@ -96,7 +98,7 @@
     <Compile Include="Modes.LocalFileSystem.Sources\FileSource.cs" />
     <Compile Include="Modes.GitHub.Sources\GithubBlobSource.cs" />
     <Compile Include="Modes.GitHub.Sources\GithubPrSource.cs" />
-    <Compile Include="Sources\SourceFactory.cs" />
+    <Compile Include="Modes.LocalFileSystem.Sources\SourceFactory.cs" />
     <Compile Include="Sources\TextAndPath.cs" />
   </ItemGroup>
   <ItemGroup>

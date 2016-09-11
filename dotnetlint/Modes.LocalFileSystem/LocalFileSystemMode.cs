@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using dotnetlint.Modes.LocalFileSystem.Sources;
 using dotnetlint.Sources;
 
 namespace dotnetlint.Modes.LocalFileSystem
@@ -16,19 +17,8 @@ namespace dotnetlint.Modes.LocalFileSystem
 
             var output = Console.Out;
 
-            foreach (var source in sources)
-            {
-                foreach (var sourceText in source.Get().Result)
-                {
-                    foreach (var rule in lintCfg.Rules)
-                    {
-                        foreach (var v in rule.Check(sourceText.Parse()))
-                        {
-                            opts.Format.Write(output, v);
-                        }
-                    }
-                }
-            }
+            WorkIt.Work(sources, lintCfg.Rules, (sourceText, v) =>
+                    opts.Format.Write(output, v));
         }
     }
 }

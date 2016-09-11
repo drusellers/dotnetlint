@@ -11,20 +11,20 @@ namespace dotnetlint.Modes.GitHub.Sources
     public class GithubBlobSource : Source
     {
         readonly Uri _input;
-
-        public GithubBlobSource(string input)
+        readonly IGitHubClient _client;
+        public GithubBlobSource(IGitHubClient client, string input)
         {
+            _client = client;
             _input = new Uri(input);
         }
 
         public async Task<IEnumerable<TextAndPath>> Get()
         {
-            var k = new GitHubClient(ProductHeaderValue.Parse("dotnetlint"));
             var parts = _input.PathAndQuery.Split('/');
             var owner = parts[2];
             var repo = parts[3];
             var sha = parts[6];
-            var x = await k.Git.Blob.Get(owner, repo, sha);
+            var x = await _client.Git.Blob.Get(owner, repo, sha);
             var b = Convert.FromBase64String(x.Content);
             var content = Encoding.UTF8.GetString(b);
             return new[]
