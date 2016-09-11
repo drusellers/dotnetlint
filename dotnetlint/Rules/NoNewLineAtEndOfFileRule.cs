@@ -7,8 +7,9 @@ namespace dotnetlint.Rules
 {
     public class NoNewLineAtEndOfFileRule : Rule
     {
-        public IEnumerable<RuleViolation> Check(SyntaxNode root)
+        public IEnumerable<RuleViolation> Check(SyntaxTree tree)
         {
+            var root = tree.GetRoot();
             var x = root.DescendantTrivia(descendIntoTrivia: true).ToList();
             var count = x.Count;
 
@@ -23,7 +24,8 @@ namespace dotnetlint.Rules
                     fileLinePositionSpan.StartLinePosition.Line,
                     fileLinePositionSpan.StartLinePosition.Character,
                     RuleDispostion.Warning,
-                    "No new line at end of file");
+                    "No new line at end of file",
+                    null);
             }
         }
     }

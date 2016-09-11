@@ -30,10 +30,10 @@ namespace dotnetlint.Sources
             foreach (var file in files)
             {
                 var source = await k.Git.Blob.Get(owner, repo, file.Sha);
-
+                
                 var b = Convert.FromBase64String(source.Content);
                 var content = Encoding.UTF8.GetString(b);
-                result.Add(new TextAndPath(SourceText.From(content), _input.ToString()));
+                result.Add(new TextAndPath(SourceText.From(content), file.FileName, new GithubData(owner, repo, number, file.Sha)));
             }
 
             return result;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using dotnetlint.Outputs;
 using dotnetlint.Rules;
 using dotnetlint.Sources;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace dotnetlint
 {
@@ -34,21 +33,17 @@ namespace dotnetlint
             }
 
             var sources = SourceFactory.BuildSources(filePaths);
+
+            //TOOD: make this dynamic based on console or github
             var output = Console.Out;
 
             foreach (var source in sources)
             {
                 foreach (var sourceText in source.Get().Result)
                 {
-                    var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source,
-                        CSharpParseOptions.Default,
-                        sourceText.Path);
-
-                    var root = syntaxTree.GetRoot();
-
                     foreach (var rule in rules)
                     {
-                        foreach (var v in rule.Check(root))
+                        foreach (var v in rule.Check(sourceText.Parse()))
                         {
                             formatter.Write(output, v);
                         }

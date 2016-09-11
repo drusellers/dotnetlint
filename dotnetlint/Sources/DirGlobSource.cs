@@ -19,7 +19,7 @@ namespace dotnetlint.Sources
         public Task<IEnumerable<TextAndPath>> Get()
         {
             var files = Directory.GetFiles(Environment.CurrentDirectory, _input, SearchOption.AllDirectories);
-            var result = files.Select(f => new TextAndPath(SourceText.From(File.ReadAllText(f)), f));
+            var result = files.Select(f => new TextAndPath(SourceText.From(File.ReadAllText(f)), f, null));
             return Task.FromResult(result);
         }
 

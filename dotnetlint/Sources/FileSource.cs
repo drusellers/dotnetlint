@@ -18,7 +18,7 @@ namespace dotnetlint.Sources
         {
             IEnumerable<TextAndPath> result = new[]
             {
-                new TextAndPath(SourceText.From(File.ReadAllText(_input)), _input)
+                new TextAndPath(SourceText.From(File.ReadAllText(_input)), _input, null)
             };
 
             return Task.FromResult(result);

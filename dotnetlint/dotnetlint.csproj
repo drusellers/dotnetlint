@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Configuration\LintConfiguration.cs" />
     <Compile Include="Configuration\LintOptionSet.cs" />
+    <Compile Include="GithubData.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="OptionAction.cs" />
     <Compile Include="OptionContext.cs" />

@@ -28,7 +28,7 @@ namespace dotnetlint.Sources
             var content = Encoding.UTF8.GetString(b);
             return new[]
             {
-                new TextAndPath(SourceText.From(content), _input.ToString())
+                new TextAndPath(SourceText.From(content), _input.ToString(), new GithubData(owner, repo, 0, sha))
             };
         }
 

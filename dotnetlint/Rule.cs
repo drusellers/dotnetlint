@@ -5,6 +5,6 @@ namespace dotnetlint
 {
     public interface Rule
     {
-        IEnumerable<RuleViolation> Check(SyntaxNode root);
+        IEnumerable<RuleViolation> Check(SyntaxTree tree);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Octokit;
 
 namespace dotnetlint.Outputs
 {
@@ -7,6 +8,10 @@ namespace dotnetlint.Outputs
         public void Write(TextWriter output,
             RuleViolation v)
         {
+            var client = new GitHubClient(new ProductHeaderValue("dotnetlint"));
+
+            client.PullRequest.Comment.Create(v.Github.Owner, v.Github.Repo, v.Github.PR,
+                      new PullRequestReviewCommentCreate(v.Message, v.Github.Sha, v.FileName, v.Line));
         }
     }
 }

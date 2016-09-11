@@ -7,8 +7,9 @@ namespace dotnetlint.Rules
 {
     public class HasTabsRule : Rule
     {
-        public IEnumerable<RuleViolation> Check(SyntaxNode root)
+        public IEnumerable<RuleViolation> Check(SyntaxTree tree)
         {
+            var root = tree.GetRoot();
             var hasTabs = root.DescendantTrivia(descendIntoTrivia: true)
                               .Where(node => node.IsKind(SyntaxKind.WhitespaceTrivia)
                                              && (node.ToString().IndexOf('\t') >= 0));
@@ -23,7 +24,8 @@ namespace dotnetlint.Rules
                         fileLinePositionSpan.StartLinePosition.Line,
                         fileLinePositionSpan.StartLinePosition.Character,
                         RuleDispostion.Warning,
-                        "Has tabs.");
+                        "Has tabs.",
+                        null);
             }
         }
     }

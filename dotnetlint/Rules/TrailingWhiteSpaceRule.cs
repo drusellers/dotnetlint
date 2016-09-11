@@ -6,8 +6,9 @@ namespace dotnetlint.Rules
 {
     public class TrailingWhiteSpaceRule : Rule
     {
-        public IEnumerable<RuleViolation> Check(SyntaxNode root)
+        public IEnumerable<RuleViolation> Check(SyntaxTree tree)
         {
+            var root = tree.GetRoot();
             var q = new Queue<SyntaxNodeOrToken>();
             var result = new List<RuleViolation>();
 
@@ -47,7 +48,8 @@ namespace dotnetlint.Rules
                             fileLinePositionSpan.StartLinePosition.Line,
                             fileLinePositionSpan.StartLinePosition.Character,
                             RuleDispostion.Warning,
-                            "Found trailing whitespace");
+                            "Found trailing whitespace",
+                            null);
                     }
                 }
             }
