@@ -32,16 +32,23 @@ namespace dotnetlint
 
             var sources = SourceFactory.BuildSources(filePaths);
             foreach (var source in sources)
-                foreach (var sourceText in source.Get())
+            {
+                foreach (var sourceText in source.Get().Result)
                 {
                     var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source, CSharpParseOptions.Default,
                         sourceText.Path);
                     var root = syntaxTree.GetRoot();
 
                     foreach (var rule in rules)
+                    {
                         foreach (var v in rule.Check(root))
+                        {
                             formatter.Write(v);
+                        }
+                    }
                 }
+            }
+               
         }
     }
 }

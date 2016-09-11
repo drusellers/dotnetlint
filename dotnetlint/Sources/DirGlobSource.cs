@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Text;
 
 namespace dotnetlint.Sources
@@ -15,10 +16,11 @@ namespace dotnetlint.Sources
             _input = input;
         }
 
-        public IEnumerable<TextAndPath> Get()
+        public Task<IEnumerable<TextAndPath>> Get()
         {
             var files = Directory.GetFiles(Environment.CurrentDirectory, _input, SearchOption.AllDirectories);
-            return files.Select(f => new TextAndPath(SourceText.From(File.ReadAllText(f)), f));
+            var result = files.Select(f => new TextAndPath(SourceText.From(File.ReadAllText(f)), f));
+            return Task.FromResult(result);
         }
 
         public static bool CanHandle(string input)
