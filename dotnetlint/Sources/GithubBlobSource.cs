@@ -31,7 +31,11 @@ namespace dotnetlint.Sources
 
         public static bool CanHandle(string input)
         {
-            return input.ToLower().Contains("http") && input.ToLower().Contains("github");
+            Uri ignored;
+
+            return input.ToLower().Contains("http") 
+                && input.ToLower().Contains("github")
+                && Uri.TryCreate(input, UriKind.Absolute, out ignored);
         }
     }
 }

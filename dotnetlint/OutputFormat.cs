@@ -1,7 +1,9 @@
-﻿namespace dotnetlint
+﻿using System.IO;
+
+namespace dotnetlint
 {
     public interface OutputFormat
     {
-        void Write(RuleViolation v);
+        void Write(TextWriter output, RuleViolation v);
     }
 }

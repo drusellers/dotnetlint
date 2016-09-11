@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.IO;
 
 namespace dotnetlint.Outputs
 {
     public class VisualStudioFormat : OutputFormat
     {
-        public void Write(RuleViolation v)
+        public void Write(TextWriter output, RuleViolation v)
         {
-            Console.WriteLine($" {v.FileName}({v.Line},{v.StartPosition}): {v.Rule}");
+            output.WriteLine($" {v.FileName}({v.Line},{v.StartPosition}): {v.Rule}");
         }
     }
 }

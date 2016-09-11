@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using dotnetlint.Outputs;
 using dotnetlint.Rules;
 using dotnetlint.Sources;
@@ -31,19 +32,23 @@ namespace dotnetlint
                 formatter = formatters[optionSet.Format];
 
             var sources = SourceFactory.BuildSources(filePaths);
+            var output = Console.Out;
+
             foreach (var source in sources)
             {
                 foreach (var sourceText in source.Get().Result)
                 {
-                    var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source, CSharpParseOptions.Default,
+                    var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source, 
+                        CSharpParseOptions.Default,
                         sourceText.Path);
+                    
                     var root = syntaxTree.GetRoot();
 
                     foreach (var rule in rules)
                     {
                         foreach (var v in rule.Check(root))
                         {
-                            formatter.Write(v);
+                            formatter.Write(output, v);
                         }
                     }
                 }
