@@ -16,7 +16,11 @@ namespace dotnetlint
             {
                 foreach (var sourceText in source.Get().Result)
                 {
-                    action(sourceText, rules.SelectMany(r => r.Check(sourceText.Parse())));
+                    var violations = rules.SelectMany(r => r.Check(sourceText.Parse()));
+                    if (violations.Any())
+                    {
+                        action(sourceText, violations);
+                    }
                 }
             }
         }

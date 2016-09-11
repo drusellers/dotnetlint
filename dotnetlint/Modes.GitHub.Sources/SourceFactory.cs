@@ -6,7 +6,8 @@ namespace dotnetlint.Modes.GitHub.Sources
 {
     public class SourceFactory
     {
-        public static IEnumerable<Source> BuildSources(IGitHubClient client, List<string> inputs)
+        public static IEnumerable<Source> BuildSources(IGitHubClient client,
+            List<string> inputs)
         {
             foreach (var input in inputs)
             {

@@ -28,6 +28,5 @@ namespace dotnetlint.Rules
         public RuleDispostion Disposition { get; }
         public string Message { get; }
         public GithubData Github { get; }
-
     }
 }

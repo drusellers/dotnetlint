@@ -12,12 +12,21 @@ namespace dotnetlint.Modes.LocalFileSystem.Sources
                 if (DirGlobSource.CanHandle(input))
                 {
                     yield return new DirGlobSource(input);
+                    continue;
+                }
+
+
+                if (SolutionSource.CanHandle(input))
+                {
+                    yield return new SolutionSource(input);
+                    continue;
                 }
 
                 if (FileSource.CanHandle(input))
                 {
                     yield return new FileSource(input);
                 }
+
             }
         }
     }
