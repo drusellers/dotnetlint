@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace dotnetlint
+namespace dotnetlint.Configuration
 {
     public abstract class Option
     {

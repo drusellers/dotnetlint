@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using dotnetlint.Sources;
 using Microsoft.CodeAnalysis.Text;
 using Octokit;
 
-namespace dotnetlint.Sources
+namespace dotnetlint.Modes.GitHub.Sources
 {
     public class GithubPrSource : Source
     {

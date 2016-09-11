@@ -1,4 +1,4 @@
-﻿namespace dotnetlint
+﻿namespace dotnetlint.Rules
 {
     public enum RuleDispostion
     {

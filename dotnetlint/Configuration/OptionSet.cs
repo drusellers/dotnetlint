@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace dotnetlint
+namespace dotnetlint.Configuration
 {
     public class OptionSet : KeyedCollection<string, Option>
     {

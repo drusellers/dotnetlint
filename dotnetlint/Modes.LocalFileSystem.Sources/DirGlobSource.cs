@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnetlint.Sources;
 using Microsoft.CodeAnalysis.Text;
 
-namespace dotnetlint.Sources
+namespace dotnetlint.Modes.LocalFileSystem.Sources
 {
     public class DirGlobSource : Source
     {

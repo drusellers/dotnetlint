@@ -1,4 +1,4 @@
-﻿namespace dotnetlint
+﻿namespace dotnetlint.Modes.GitHub
 {
     public class GithubData
     {

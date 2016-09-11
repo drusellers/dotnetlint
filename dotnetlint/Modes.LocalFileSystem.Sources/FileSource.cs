@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using dotnetlint.Sources;
 using Microsoft.CodeAnalysis.Text;
 
-namespace dotnetlint.Sources
+namespace dotnetlint.Modes.LocalFileSystem.Sources
 {
     public class FileSource : Source
     {

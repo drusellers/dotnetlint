@@ -63,35 +63,41 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\LintConfiguration.cs" />
-    <Compile Include="Configuration\LintOptionSet.cs" />
-    <Compile Include="GithubData.cs" />
-    <Compile Include="Option.cs" />
-    <Compile Include="OptionAction.cs" />
-    <Compile Include="OptionContext.cs" />
-    <Compile Include="OptionException.cs" />
-    <Compile Include="OptionValueCollection.cs" />
-    <Compile Include="OptionSet.cs" />
-    <Compile Include="OptionValueType.cs" />
-    <Compile Include="OutputFormat.cs" />
+    <Compile Include="LintConfiguration.cs" />
+    <Compile Include="LintOptionSet.cs" />
+    <Compile Include="Modes.GitHub\GithubData.cs" />
+    <Compile Include="Modes.GitHub\GitHubMode.cs" />
+    <Compile Include="Modes.GitHub\GitHubOptionSet.cs" />
+    <Compile Include="Modes.LocalFileSystem\LocalFileSetOptionSet.cs" />
+    <Compile Include="Modes.LocalFileSystem\LocalFileSystemMode.cs" />
+    <Compile Include="Modes\Mode.cs" />
+    <Compile Include="Modes\ModeFactory.cs" />
+    <Compile Include="Configuration\Option.cs" />
+    <Compile Include="Configuration\OptionAction.cs" />
+    <Compile Include="Configuration\OptionContext.cs" />
+    <Compile Include="Configuration\OptionException.cs" />
+    <Compile Include="Configuration\OptionValueCollection.cs" />
+    <Compile Include="Configuration\OptionSet.cs" />
+    <Compile Include="Configuration\OptionValueType.cs" />
+    <Compile Include="Configuration\OutputFormat.cs" />
     <Compile Include="Outputs\CompatFormat.cs" />
     <Compile Include="Outputs\GithubPullRequestFormat.cs" />
     <Compile Include="Outputs\VisualStudioFormat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RuleDispostion.cs" />
+    <Compile Include="Rules\RuleDispostion.cs" />
     <Compile Include="Rules\HasTabsRule.cs" />
     <Compile Include="Rules\NoNewLineAtEndOfFileRule.cs" />
-    <Compile Include="Rule.cs" />
+    <Compile Include="Rules\Rule.cs" />
     <Compile Include="Rules\TrailingWhiteSpaceRule.cs" />
-    <Compile Include="RuleViolation.cs" />
-    <Compile Include="Source.cs" />
-    <Compile Include="Sources\DirGlobSource.cs" />
-    <Compile Include="Sources\FileSource.cs" />
-    <Compile Include="Sources\GithubBlobSource.cs" />
-    <Compile Include="Sources\GithubPrSource.cs" />
+    <Compile Include="Rules\RuleViolation.cs" />
+    <Compile Include="Sources\Source.cs" />
+    <Compile Include="Modes.LocalFileSystem.Sources\DirGlobSource.cs" />
+    <Compile Include="Modes.LocalFileSystem.Sources\FileSource.cs" />
+    <Compile Include="Modes.GitHub.Sources\GithubBlobSource.cs" />
+    <Compile Include="Modes.GitHub.Sources\GithubPrSource.cs" />
     <Compile Include="Sources\SourceFactory.cs" />
-    <Compile Include="TextAndPath.cs" />
+    <Compile Include="Sources\TextAndPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -112,6 +118,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

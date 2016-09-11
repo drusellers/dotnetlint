@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using dotnetlint.Rules;
 
-namespace dotnetlint
+namespace dotnetlint.Configuration
 {
     public interface OutputFormat
     {

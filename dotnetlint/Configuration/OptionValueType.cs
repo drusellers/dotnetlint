@@ -1,4 +1,4 @@
-﻿namespace dotnetlint
+﻿namespace dotnetlint.Configuration
 {
     public enum OptionValueType
     {

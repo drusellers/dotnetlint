@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using dotnetlint.Configuration;
+using dotnetlint.Rules;
 
 namespace dotnetlint.Outputs
 {

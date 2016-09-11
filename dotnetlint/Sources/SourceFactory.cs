@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using dotnetlint.Modes.GitHub.Sources;
+using dotnetlint.Modes.LocalFileSystem.Sources;
 
 namespace dotnetlint.Sources
 {

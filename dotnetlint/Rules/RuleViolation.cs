@@ -1,4 +1,6 @@
-﻿namespace dotnetlint
+﻿using dotnetlint.Modes.GitHub;
+
+namespace dotnetlint.Rules
 {
     public class RuleViolation
     {

@@ -10,7 +10,7 @@ using System.Linq;
 using NDesk.Options;
 #endif
 
-namespace dotnetlint
+namespace dotnetlint.Configuration
 {
     public class OptionValueCollection
         : IList,

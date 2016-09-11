@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace dotnetlint
+namespace dotnetlint.Configuration
 {
     [Serializable]
     public class OptionException : Exception

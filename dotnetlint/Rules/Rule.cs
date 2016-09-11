@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace dotnetlint
+namespace dotnetlint.Rules
 {
     public interface Rule
     {

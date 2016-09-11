@@ -1,9 +1,10 @@
 ﻿using System;
+using dotnetlint.Modes.GitHub;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
-namespace dotnetlint
+namespace dotnetlint.Sources
 {
     public class TextAndPath
     {
