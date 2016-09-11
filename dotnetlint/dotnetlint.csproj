@@ -104,6 +104,7 @@
     <Compile Include="Modes.LocalFileSystem.Sources\SolutionSource.cs" />
     <Compile Include="Modes.LocalFileSystem\LocalFileSetOptionSet.cs" />
     <Compile Include="Modes.LocalFileSystem\LocalFileSystemMode.cs" />
+    <Compile Include="Outputs\GitHubPrFormat.cs" />
     <Compile Include="Outputs\StylishFormat.cs" />
     <Compile Include="WorkIt.cs" />
     <Compile Include="Modes\Mode.cs" />

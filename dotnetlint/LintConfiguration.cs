@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using dotnetlint.Configuration;
 using dotnetlint.Rules;
 
 namespace dotnetlint
@@ -8,5 +9,6 @@ namespace dotnetlint
         bool Verbose { get; }
         bool Help { get; }
         IEnumerable<Rule> Rules { get; }
+        OutputFormat Format { get; }
     }
 }

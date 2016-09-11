@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using dotnetlint.Modes.GitHub;
 using dotnetlint.Modes.LocalFileSystem;
 using NUnit.Framework;
 using Shouldly;
@@ -22,12 +23,12 @@ namespace dotnetlint.tests
             var args = "-v -h -f=visualstudio file.txt".Split(' ');
             var o = new LintOptionSet();
             var remaining = o.Parse(args);
-            remaining.ShouldContain("-f=visualstudio","file.txt");
+            remaining.ShouldContain("file.txt");
             var f = new LocalFileSetOptionSet();
             var remaining2 = f.Parse(remaining);
             remaining2.ShouldContain("file.txt");
 
-            f.Format.ShouldNotBeNull();
+            o.Format.ShouldNotBeNull();
         }
 
         [Test]
@@ -41,7 +42,20 @@ namespace dotnetlint.tests
             var remaining2 = f.Parse(remaining);
             remaining2.ShouldContain("file.txt");
 
-            f.Format.ShouldNotBeNull();
+            o.Format.ShouldNotBeNull();
+        }
+
+        [Test]
+        public void Github()
+        {
+            var args = "github https://api.github.com/repos/drusellers/dotnetlint/git/blobs/86e84e955650b8df696af6ac7566090afdcf7285".Split(' ');
+            var o = new LintOptionSet();
+            var remaining = o.Parse(args);
+            remaining.ShouldContain("github","https://api.github.com/repos/drusellers/dotnetlint/git/blobs/86e84e955650b8df696af6ac7566090afdcf7285");
+            var f = new GitHubOptionSet();
+            var remaining2 = f.Parse(remaining);
+            remaining2.ShouldContain("github", "https://api.github.com/repos/drusellers/dotnetlint/git/blobs/86e84e955650b8df696af6ac7566090afdcf7285");
+            
         }
     }
 }

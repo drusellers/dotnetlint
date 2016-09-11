@@ -20,7 +20,7 @@ namespace dotnetlint.Modes.LocalFileSystem
 
             WorkIt.Work(sources, lintCfg.Rules,
                 (sourceText,
-                    v) => opts.Format.Write(output, sourceText, v)
+                    v) => lintCfg.Format.Write(output, sourceText, v)
             );
         }
     }

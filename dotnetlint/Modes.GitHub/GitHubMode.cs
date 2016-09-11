@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using dotnetlint.Modes.GitHub.Sources;
+using dotnetlint.Outputs;
 using Octokit;
 using Octokit.Internal;
 
@@ -24,16 +25,8 @@ namespace dotnetlint.Modes.GitHub
             WorkIt.Work(sources, lintCfg.Rules, (sourceText,
                     violations) =>
                 {
-                    foreach (var v in violations)
-                    {
-                        ghClient.PullRequest.Comment.Create(sourceText.Github.Owner,
-                                    sourceText.Github.Repo,
-                                    sourceText.Github.PR,
-                                    new PullRequestReviewCommentCreate(v.Message,
-                                        v.Github.Sha,
-                                        sourceText.Path,
-                                        v.Line));
-                    }
+                    new GitHubPrFormat(ghClient).Write(Console.Out, sourceText, violations);
+                    lintCfg.Format.Write(Console.Out, sourceText, violations);
                 });
         }
     }
