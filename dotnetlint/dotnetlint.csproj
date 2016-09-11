@@ -68,6 +68,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="OutputFormat.cs" />
     <Compile Include="Outputs\CompatFormat.cs" />
+    <Compile Include="Outputs\GithubPullRequestFormat.cs" />
     <Compile Include="Outputs\VisualStudioFormat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

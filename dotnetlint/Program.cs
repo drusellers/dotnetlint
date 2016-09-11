@@ -9,7 +9,7 @@ namespace dotnetlint
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             var optionSet = new LintOptionSet();
 
@@ -29,7 +29,9 @@ namespace dotnetlint
 
             OutputFormat formatter = new VisualStudioFormat();
             if (formatters.ContainsKey(optionSet.Format))
+            {
                 formatter = formatters[optionSet.Format];
+            }
 
             var sources = SourceFactory.BuildSources(filePaths);
             var output = Console.Out;
@@ -38,10 +40,10 @@ namespace dotnetlint
             {
                 foreach (var sourceText in source.Get().Result)
                 {
-                    var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source, 
+                    var syntaxTree = CSharpSyntaxTree.ParseText(sourceText.Source,
                         CSharpParseOptions.Default,
                         sourceText.Path);
-                    
+
                     var root = syntaxTree.GetRoot();
 
                     foreach (var rule in rules)
@@ -53,7 +55,6 @@ namespace dotnetlint
                     }
                 }
             }
-               
         }
     }
 }

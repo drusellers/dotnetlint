@@ -1,8 +1,9 @@
 ﻿namespace dotnetlint
 {
-    public class LintOptionSet : 
-        OptionSet,
-        LintConfiguration
+    public class LintOptionSet
+        :
+            OptionSet,
+            LintConfiguration
     {
         public LintOptionSet()
         {

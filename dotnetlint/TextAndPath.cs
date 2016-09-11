@@ -4,7 +4,8 @@ namespace dotnetlint
 {
     public class TextAndPath
     {
-        public TextAndPath(SourceText source, string path)
+        public TextAndPath(SourceText source,
+            string path)
         {
             Source = source;
             Path = path;

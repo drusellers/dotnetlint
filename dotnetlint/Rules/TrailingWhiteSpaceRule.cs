@@ -16,10 +16,14 @@ namespace dotnetlint.Rules
             {
                 var current = q.Dequeue();
                 if (current == null)
+                {
                     continue;
+                }
 
                 foreach (var child in current.ChildNodesAndTokens())
+                {
                     q.Enqueue(child);
+                }
 
                 result.AddRange(Check(current));
             }
@@ -27,13 +31,14 @@ namespace dotnetlint.Rules
             return result;
         }
 
-        private IEnumerable<RuleViolation> Check(SyntaxNodeOrToken node)
+        IEnumerable<RuleViolation> Check(SyntaxNodeOrToken node)
         {
             var trivia = node.GetTrailingTrivia();
             for (var i = 0; i < trivia.Count; i++)
             {
                 var inspect = trivia[i];
                 if (inspect.IsKind(SyntaxKind.EndOfLineTrivia))
+                {
                     if ((i > 0) && trivia[i - 1].IsKind(SyntaxKind.WhitespaceTrivia))
                     {
                         var fileLinePositionSpan = node.GetLocation().GetLineSpan();
@@ -44,6 +49,7 @@ namespace dotnetlint.Rules
                             RuleDispostion.Warning,
                             "Found trailing whitespace");
                     }
+                }
             }
         }
     }

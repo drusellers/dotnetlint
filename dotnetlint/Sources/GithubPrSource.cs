@@ -10,7 +10,7 @@ namespace dotnetlint.Sources
 {
     public class GithubPrSource : Source
     {
-        private Uri _input;
+        readonly Uri _input;
 
         public GithubPrSource(string input)
         {
@@ -19,7 +19,7 @@ namespace dotnetlint.Sources
 
         public async Task<IEnumerable<TextAndPath>> Get()
         {
-            var k = new Octokit.GitHubClient(ProductHeaderValue.Parse("dotnetlint"));
+            var k = new GitHubClient(ProductHeaderValue.Parse("dotnetlint"));
             var parts = _input.PathAndQuery.Split('/');
             var owner = parts[2];
             var repo = parts[3];
@@ -44,10 +44,10 @@ namespace dotnetlint.Sources
             Uri ignored;
 
             return input.ToLower().Contains("http")
-                && input.ToLower().Contains("github")
-                && input.ToLower().Contains("pulls")
-                && Regex.IsMatch(input, @"pulls/\d+/files")
-                && Uri.TryCreate(input, UriKind.Absolute, out ignored);
+                   && input.ToLower().Contains("github")
+                   && input.ToLower().Contains("pulls")
+                   && Regex.IsMatch(input, @"pulls/\d+/files")
+                   && Uri.TryCreate(input, UriKind.Absolute, out ignored);
         }
     }
 }

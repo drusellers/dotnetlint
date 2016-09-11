@@ -10,7 +10,12 @@ namespace dotnetlint
 
     public class RuleViolation
     {
-        public RuleViolation(string rule, string fileName, int line, int startPosition, RuleDispostion dispo, string message)
+        public RuleViolation(string rule,
+            string fileName,
+            int line,
+            int startPosition,
+            RuleDispostion dispo,
+            string message)
         {
             Rule = rule;
             FileName = fileName;

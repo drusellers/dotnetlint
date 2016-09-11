@@ -9,7 +9,7 @@ namespace dotnetlint.Sources
 {
     public class DirGlobSource : Source
     {
-        private string _input;
+        readonly string _input;
 
         public DirGlobSource(string input)
         {

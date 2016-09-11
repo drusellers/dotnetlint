@@ -7,7 +7,7 @@ namespace dotnetlint.Sources
 {
     public class FileSource : Source
     {
-        private string _input;
+        readonly string _input;
 
         public FileSource(string input)
         {
@@ -28,6 +28,5 @@ namespace dotnetlint.Sources
         {
             return File.Exists(input);
         }
-        
     }
 }
